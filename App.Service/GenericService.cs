@@ -41,6 +41,11 @@ namespace App.Service
             return _repository.Get(filter, orderBy, includeProperties).AsQueryable().ProjectTo<T>();
         }
 
+        public virtual void Insert(TEntity entity)
+        {
+            _repository.Insert(entity);
+        }
+        
         public virtual void Delete(object id)
         {
             _repository.Delete(id);

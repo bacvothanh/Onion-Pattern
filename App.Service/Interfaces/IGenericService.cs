@@ -18,6 +18,8 @@ namespace App.Service.Interfaces
             Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null,
             params Expression<Func<TEntity, object>>[] includeProperties);
 
+        void Insert(TEntity entity);
+
         void Delete(object id);
         void Delete(TEntity entityToDelete);
     }
