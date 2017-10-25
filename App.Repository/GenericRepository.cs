@@ -81,11 +81,14 @@ namespace App.Repository
                         deleteEntity.DeleteBy = currentUser.Id;
                     }
 
-                    Update(entityToDelete);
+                    dbSet.Attach(entityToDelete);
+                    db.Entry(entityToDelete).State = EntityState.Modified;
+                    db.SaveChanges();
                     return;
                 }
 
                 dbSet.Remove(entityToDelete);
+                db.SaveChanges();
             }
         }
 
