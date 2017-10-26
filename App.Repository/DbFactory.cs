@@ -12,6 +12,7 @@ namespace App.Repository
     public class DbFactory : IDbFactory
     {
         private readonly string _connectionString;
+        private static readonly object LockObject = new object();
 
         public DbFactory(string connectionString)
         {
@@ -20,7 +21,10 @@ namespace App.Repository
 
         public IApplicationDbContext Create()
         {
-            return new ApplicationDbContext(_connectionString);
+            lock (LockObject)
+            {
+                return new ApplicationDbContext(_connectionString);
+            }
         }
     }
 }
